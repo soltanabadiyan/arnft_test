@@ -3,9 +3,8 @@ var fs = require('fs');
 var sys = require('sys');
 
 var app = express();
-    app.use(express.logger());
     app.set("view options", {layout: false});
-    app.use(express.static(__dirname + '/views'));
+    app.use(express.static(__dirname + '/'));
 
 app.get('/', function(req, res){
     res.render('index.html');
