@@ -52,6 +52,7 @@
     "worker-loader": "^3.0.8"
   },
   "scripts": {
+    "preinstall": "npm i -g http-server",
     "start": "http-server . -p 80",
     "build-ts": "rimraf ./build && tsc && webpack --mode production",
     "dev-ts": "rimraf ./build && tsc && webpack --mode development --progress --watch",
