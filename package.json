@@ -53,7 +53,7 @@
   }, 
   "scripts": {
     "preinstall": "npm i -g http-server",
-    "start": "http-server . -p 80",
+    "start": "node app.js",
     "build-ts": "rimraf ./build && tsc && webpack --mode production",
     "dev-ts": "rimraf ./build && tsc && webpack --mode development --progress --watch",
     "docs": "typedoc",
