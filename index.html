@@ -3,28 +3,76 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Soltanabadiyan AR Catalogue</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-    <link rel="stylesheet" href="css/nft-style.css">
-</head>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="./fav/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="./fav/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="./fav/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="./fav/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="./fav/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="./fav/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="./fav/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="./fav/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="./fav/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="./fav/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="./fav/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
+        <link rel="manifest" href="./fav/manifest.json">
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="msapplication-TileImage" content="./fav/ms-icon-144x144.png">
+        <meta name="theme-color" content="#000000">
+        <title>Sahel Photo</title>
+        <meta name="apple-mobile-web-app-title" content="Sahel Photo">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <meta name="apple-mobile-web-app-status-bar-style" content="white">
+
+        <meta name="apple-mobile-web-app-title" content="Notentool">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
+        <link rel="stylesheet" href="css/nft-style.css">
+    </head>
 
 <body>
 
-    <a href="https://soltanabadiyan.ir"
-        class="ui marker" target="_blank">
+    <a href="https://soltanabadiyan.ir" class="ui marker" target="_blank">
         🖼 By Soltanabadiyan Studio
     </a>
-    <video loop autoplay muted webkit-playsinline playsinline crossOrigin="anonymous" id="arvideo">
-        <source src="https://avo-content-dev.s3.amazonaws.com/videos/bg_1588085276090.mp4" type='video/mp4'>
-    </video>
+
+
+    <video id="logovid" muted class='arvideo' src="./vid/logo.mp4" preload="auto" response-type="arraybuffer"
+        crossorigin webkit-playsinline loop playsinline></video>
+    <video id="wed1vid" muted class='arvideo' src="./vid/wed1.mp4" preload="auto" response-type="arraybuffer"
+        crossorigin webkit-playsinline loop playsinline></video>
+    <video id="wed2vid" muted class='arvideo' src="./vid/wed2.mp4" preload="auto" response-type="arraybuffer"
+        crossorigin webkit-playsinline loop playsinline></video>
 
     <script src="js/third_party/three.js/three.min.js"></script>
     <script src="js/ARnftThreejs.js"></script>
     <script src="./dist/ARnft.js"></script>
 
     <script>
-        ARnft.ARnft.init(640, 480, ["./DataNFT/pinball"], ['pinball'], 'config.json', true)
+        function unmuteMe(elem) {
+            elem.muted = false;
+
+        }
+
+        const entities = [
+            { name: 'logo', markerUrl: "./arcatalogue/DataNFT/logo" },
+            { name: 'wed1', markerUrl: "./arcatalogue/DataNFT/wedding1" },
+            { name: 'wed2', markerUrl: "./arcatalogue/DataNFT/wedding2" }
+        ]
+        ARnft.ARnft.initWithEntities(640, 480, entities, 'config.json', true)
             .then((nft) => {
+
+
+                let testEntities = ARnft.ARnft.getEntities();
+                console.log("entities from getEntities static method: ", testEntities);
+
                 document.addEventListener('containerEvent', function (ev) {
 
                     let canvas = document.getElementById('canvas');
@@ -35,10 +83,10 @@
                             "alpha": true,
                             "antialias": true,
                             "context": null,
-                            "precision": "mediump",
+                            "precision": "highp",
                             "premultipliedAlpha": true,
-                            "stencil": true,
-                            "depth": true,
+                            "stencil": false,
+                            "depth": false,
                             "logarithmicDepthBuffer": true
                         },
                         "camera": {
@@ -49,25 +97,38 @@
                         }
                     }
 
-                    let sceneThreejs = new ARnftThreejs.SceneRendererTJS(config, canvas, nft.uuid,
-                        true);
+                    let sceneThreejs = new ARnftThreejs.SceneRendererTJS(config, canvas, nft.uuid, true);
                     sceneThreejs.initRenderer();
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
-                    // Set width, height and width and height number of segments of the PlaneGeometry.
-                    let imgConfig = {w: 1, h: 1, ws: 1, hs: 1};
-                    nftAddTJS.addVideo('arvideo', 'pinball', 180, imgConfig, false);
+                    let imgConfig = { w: 1, h: 1, ws: 1, hs: 1 };
+                    nftAddTJS.addVideo('logovid', 'logo', 180, imgConfig, false);
+                    nftAddTJS.addVideo('wed1vid', 'wed1', 180, imgConfig, false);
+                    nftAddTJS.addVideo('wed2vid', 'wed2', 180, imgConfig, false);
+
+
 
                     const tick = () => {
                         sceneThreejs.draw();
                         window.requestAnimationFrame(tick)
                     }
                     tick()
+
                 })
+
+
+
             }).catch((error) => {
                 console.log(error);
             });
+
+        setTimeout(function () {
+
+         //   document.querySelectorAll("video").forEach(elem => unmuteMe(elem));
+
+        }, 5000)
     </script>
+
 </body>
 
 </html>
