@@ -1,134 +1,141 @@
-<!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
-<head>
-    <meta charset="utf-8">
-    <!DOCTYPE html>
-    <html>
+    <link rel="apple-touch-icon" sizes="57x57" href="./fav/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./fav/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./fav/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./fav/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./fav/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./fav/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./fav/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./fav/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./fav/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./fav/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./fav/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
+    <link rel="manifest" href="./fav/manifest.json">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="./fav/ms-icon-144x144.png">
+    <meta name="theme-color" content="#000000">
+    <title>Sahel Photo</title>
+    <meta name="apple-mobile-web-app-title" content="Sahel Photo">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <head>
-        <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="./fav/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="./fav/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="./fav/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="./fav/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="./fav/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="./fav/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="./fav/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="./fav/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="./fav/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="./fav/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="./fav/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
-        <link rel="manifest" href="./fav/manifest.json">
-        <meta name="msapplication-TileColor" content="#000000">
-        <meta name="msapplication-TileImage" content="./fav/ms-icon-144x144.png">
-        <meta name="theme-color" content="#000000">
-        <title>Sahel Photo</title>
-        <meta name="apple-mobile-web-app-title" content="Sahel Photo">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-
-        <meta name="apple-mobile-web-app-status-bar-style" content="white">
-
-        <meta name="apple-mobile-web-app-title" content="Notentool">
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-        <link rel="stylesheet" href="css/nft-style.css">
-    </head>
-
-<body>
-
-    <a href="https://soltanabadiyan.ir" class="ui marker" target="_blank">
-        🖼 By Soltanabadiyan Studio
-    </a>
-
-
-    <video id="logovid" muted class='arvideo' src="./vid/logo.mp4" preload="auto" response-type="arraybuffer"
-        crossorigin webkit-playsinline loop playsinline></video>
-    <video id="wed1vid" muted class='arvideo' src="./vid/wed1.mp4" preload="auto" response-type="arraybuffer"
-        crossorigin webkit-playsinline loop playsinline></video>
-    <video id="wed2vid" muted class='arvideo' src="./vid/wed2.mp4" preload="auto" response-type="arraybuffer"
-        crossorigin webkit-playsinline loop playsinline></video>
-
-    <script src="js/third_party/three.js/three.min.js"></script>
-    <script src="js/ARnftThreejs.js"></script>
-    <script src="./dist/ARnft.js"></script>
-
+    <meta name="apple-mobile-web-app-title" content="Notentool">
+    
     <script>
-        function unmuteMe(elem) {
-            elem.muted = false;
-
-        }
-
-        const entities = [
-            { name: 'logo', markerUrl: "./DataNFT/logo" },
-            { name: 'wed1', markerUrl: "./DataNFT/wedding1" },
-            { name: 'wed2', markerUrl: "./DataNFT/wedding2" }
-        ]
-        ARnft.ARnft.initWithEntities(640, 480, entities, 'config.json', true)
-            .then((nft) => {
-
-
-                let testEntities = ARnft.ARnft.getEntities();
-                console.log("entities from getEntities static method: ", testEntities);
-
-                document.addEventListener('containerEvent', function (ev) {
-
-                    let canvas = document.getElementById('canvas');
-                    let fov = 0.8 * 180 / Math.PI;
-                    let ratio = window.clientWidth / window.clientHeight;
-                    let config = {
-                        "renderer": {
-                            "alpha": true,
-                            "antialias": true,
-                            "context": null,
-                            "precision": "highp",
-                            "premultipliedAlpha": true,
-                            "stencil": false,
-                            "depth": false,
-                            "logarithmicDepthBuffer": true
-                        },
-                        "camera": {
-                            "fov": fov,
-                            "ratio": ratio,
-                            "near": 0.01,
-                            "far": 1000
-                        }
-                    }
-
-                    let sceneThreejs = new ARnftThreejs.SceneRendererTJS(config, canvas, nft.uuid, true);
-                    sceneThreejs.initRenderer();
-
-                    let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
-                    let imgConfig = { w: 1, h: 1, ws: 1, hs: 1 };
-                    nftAddTJS.addVideo('logovid', 'logo', 180, imgConfig, false);
-                    nftAddTJS.addVideo('wed1vid', 'wed1', 180, imgConfig, false);
-                    nftAddTJS.addVideo('wed2vid', 'wed2', 180, imgConfig, false);
 
 
 
-                    const tick = () => {
-                        sceneThreejs.draw();
-                        window.requestAnimationFrame(tick)
-                    }
-                    tick()
+      document.addEventListener("DOMContentLoaded", function() { 
+        const sceneEl = document.querySelector('a-scene');
+    const arSystem = sceneEl.systems["mindar-image-system"];
 
-                })
+    const exampleTarget = document.querySelector('#example-target');
+    const examplePlane = document.querySelector('#example-plane');
+
+    exampleTarget.addEventListener("targetFound", event => {
+      console.log("target found");
+        let video = document.querySelector("#vidwed1");
+      video.muted=false;
+      video.play();
+    });
+
+    exampleTarget.addEventListener("targetLost", event => {
+      console.log("target lost");
+        let video = document.querySelector("#vidwed1");
+      video.muted=true;
+      video.pause();
+    });
+
+    examplePlane.addEventListener("click", event => {
+      console.log("plane click");
+    });
+
+    
+
+
+    
+    const exampleTarget2 = document.querySelector('#example-target2');
+    const examplePlane2 = document.querySelector('#example-plane2');
+
+    exampleTarget2.addEventListener("targetFound", event => {
+      console.log("target found");
+        let video = document.querySelector("#vidwed2");
+      video.muted=false;
+      video.play();
+    });
+
+    exampleTarget2.addEventListener("targetLost", event => {
+      console.log("target lost");
+        let video = document.querySelector("#vidwed2");
+      video.muted=true;
+      video.pause();
+    });
+
+    examplePlane2.addEventListener("click", event => {
+      console.log("plane click");
+    });
 
 
 
-            }).catch((error) => {
-                console.log(error);
-            });
+    
+    const exampleTarget3 = document.querySelector('#example-target3');
+    const examplePlane3 = document.querySelector('#example-plane3');
 
-        setTimeout(function () {
+    exampleTarget3.addEventListener("targetFound", event => {
+      console.log("target found");
+        let video = document.querySelector("#vidlogo");
+      video.muted=false;
+      video.play();
+    });
 
-         //   document.querySelectorAll("video").forEach(elem => unmuteMe(elem));
+    exampleTarget3.addEventListener("targetLost", event => {
+      console.log("target lost");
+        let video = document.querySelector("#vidlogo");
+      video.muted=true
+      video.pause();
+    });
 
-        }, 5000)
+    examplePlane3.addEventListener("click", event => {
+      console.log("plane click");
+    });
+      });
     </script>
-
-</body>
-
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./trained/targets.mind; autoStart: true;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    
+    device-orientation-permission-ui="enabled: true" 
+    >
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
+      <a-assets>
+        <video type=”video/mp4” embed id="vidwed1" src="./vid/vid4.mp4" preload="auto" response-type="arraybuffer" crossorigin
+            webkit-playsinline autoplay playsinline muted></video>
+        <video type=”video/mp4” embed id="vidwed2" src="./vid/wed1.mp4" preload="auto" response-type="arraybuffer" crossorigin
+                webkit-playsinline autoplay playsinline muted></video>
+        <video type=”video/mp4” embed id="vidlogo" src="./vid/logo.mp4" preload="auto" response-type="arraybuffer" crossorigin
+                    webkit-playsinline autoplay playsinline muted></video>
+    
+    </a-assets>
+      <a-entity id="example-target" mindar-image-target="targetIndex: 3">
+        <a-plane id="example-plane" material="src:#vidwed1" rotation="0 0 0"  position="0.1 -0.09 0" class="clickable"  scale="1.1 1.1 1"></a-plane>
+      </a-entity>
+      <a-entity id="example-target2" mindar-image-target="targetIndex: 1">
+        <a-plane id="example-plane2" material="src:#vidwed2" rotation="0 0 0"  position="0.1 -0.09 0"  class="clickable" scale="1.1 1.1 1"></a-plane>
+      </a-entity>
+      <a-entity id="example-target3" mindar-image-target="targetIndex: 0">
+        <a-plane id="example-plane3" material="src:#vidlogo" rotation="0 0 0"  position="0.1 -0.09 0" class="clickable" scale="1.1 1.1 1"></a-plane>
+      </a-entity>
+    </a-scene>
+  </body>
 </html>
